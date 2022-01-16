@@ -4,7 +4,7 @@
 <h3 class="light-blue-text text-darken-4 center-align">Add Definition</h3>
 
 <div class="row card-panel grey lighten-5">
-    <form class="col s12" method="POST" action="">
+    <form class="col s12" method="POST" action="{{ url_for('add_definition') }}">
         <div class="row">
             <div class="input-field col s12">
                 <i class="fas fa-folder-open prefix light-blue-text text-darken-4"></i>
@@ -30,7 +30,7 @@
                 <i class="fas fa-align-left prefix light-blue-text text-darken-4"></i>
                 <textarea id="definition_description" name="definition_description" minlength="5"
                     maxlength="300" class="materialize-textarea validate" required></textarea>
-                <label for="definition_description">Defintion Description</label>
+                <label for="definition_description">Definition Description</label>
             </div>
         </div>
         <div class="row">
@@ -43,6 +43,14 @@
                         Is it important to learn it?
                     </label>
                 </div>
+            </div>
+        </div>
+        <!-- submit button -->
+        <div class="row">
+            <div class="col s12 center-align">
+                <button type="submit" class="btn-large light-blue darken-1 text-shadow">
+                    Add Definition <i class="fas fa-plus-square right"></i>
+                </button>
             </div>
         </div>
     </form>

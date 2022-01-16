@@ -89,8 +89,21 @@ def logout():
     session.pop("user")
     return redirect(url_for("login"))
 
-@app.route("/add_definition")
+@app.route("/add_definition", methods=["GET", "POST"])
 def add_definition():
+    if request.method == "POST":
+        is_important = "on" if request.form.get("is_important") else "off"
+        definition = {
+            "category_name": request.form.get("category_name"),
+            "definition_name": request.form.get("definition_name"),
+            "definition_description": request.form.get("definition_description"),
+            "is_important": is_important,
+            "created_by": session["user"]
+        }
+        mongo.db.definitions.insert_one(definition)
+        flash("Definition Successfully Added")
+        return redirect(url_for("get_definitions"))
+
     categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template("add_definition.html", categories=categories)
 

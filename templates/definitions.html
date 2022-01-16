@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 
+<h3 class="light-blue-text text-darken-4 center-align">All Definitions</h3>
+
 <ul class="collapsible">
     {% for definition in definitions %}
     <li>
@@ -15,6 +17,7 @@
         <div class="collapsible-body">
             <strong>{{ definition.category_name }}</strong>
             <p>{{ definition.definition_description }}</p>
+            <p><em>by: {{ definition.created_by }}</em></p>
         </div>
     </li>
     {% endfor %}
