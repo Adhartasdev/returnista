@@ -1,26 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
 
+<ul class="collapsible">
     {% for definition in definitions %}
-        {{ definition.definition_name }}<br>
-        {{ definition.category_name }}<br>
-        {{ definition.definition_description }}<br>
-        {{ definition.is_important }}<br>
+    <li>
+        <div class="collapsible-header white-text light-blue darken-4 text-shadow">
+            <i class="fas fa-caret-down"></i>
+            <strong>{{ definition.definition_name }}</strong>
+            {% if definition.is_important == "on" %}
+            <i class="fas fa-exclamation-circle light-blue-text text-lighten-2 tooltipped" data-position="right"
+                data-tooltip="Important Definition: Learn it!"></i>
+            {% endif %}
+        </div>
+        <div class="collapsible-body">
+            <strong>{{ definition.category_name }}</strong>
+            <p>{{ definition.definition_description }}</p>
+        </div>
+    </li>
     {% endfor %}
+</ul>
 
-    <ul class="collapsible">
-        <li>
-            <div class="collapsible-header white-text light-blue darken-4 text-shadow"><i class="fas fa-caret-down"></i>First</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
-        <li>
-            <div class="collapsible-header white-text light-blue darken-4 text-shadow"><i class="fas fa-caret-down"></i>Second</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
-        <li>
-            <div class="collapsible-header white-text light-blue darken-4 text-shadow"><i class="fas fa-caret-down"></i>Third</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
-    </ul>
-    
- {% endblock %}
+{% endblock %}
