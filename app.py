@@ -91,7 +91,8 @@ def logout():
 
 @app.route("/add_definition")
 def add_definition():
-    return render_template("add_definition.html")
+    categories = mongo.db.categories.find().sort("category_name", 1)
+    return render_template("add_definition.html", categories=categories)
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
