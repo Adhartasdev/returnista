@@ -110,8 +110,20 @@ def add_definition():
 
 @app.route("/edit_definition/<definition_id>", methods=["GET", "POST"])
 def edit_definition(definition_id):
+    if request.method == "POST":
+        is_important = "on" if request.form.get("is_important") else "off"
+        submit = {
+            "category_name": request.form.get("category_name"),
+            "definition_name": request.form.get("definition_name"),
+            "definition_description": request.form.get("definition_description"),
+            "is_important": is_important,
+            "created_by": session["user"]
+        }
+        mongo.db.definitions.update({"_id": ObjectId(definition_id)}, submit)
+        flash("Definition Successfully Updated")
+
     definition = mongo.db.definitions.find_one({"_id": ObjectId(definition_id)})
-    categories = mongo.db.categories.find().sort("category_name", 1)
+    categories = mongo.db.categories.find().sort("cßategory_name", 1)
     return render_template("edit_definition.html", definition=definition, categories=categories)
 
 if __name__ == "__main__":
